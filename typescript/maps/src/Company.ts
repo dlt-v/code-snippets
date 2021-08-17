@@ -1,18 +1,18 @@
 import faker from 'faker';
-    //we usually shouldn't use default exports
-export class User {
+
+export class Company {
     name: string;
+    catchPhrase: string;
     location: {
         lat: number;    //latitude
         lng: number;    //longitude
-    }
-
+    };
     constructor() {
-        this.name = faker.name.firstName();
+        this.name = faker.company.companyName();
+        this.catchPhrase = faker.company.catchPhrase();
         this.location = {
             lat: parseFloat(faker.address.latitude()),
             lng: parseFloat(faker.address.longitude())
         }
-
     }
 }

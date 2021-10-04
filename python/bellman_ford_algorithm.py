@@ -2,7 +2,7 @@ import random
 random.seed(19012)
 
 class Graf:
- 
+                                
     def __init__(self, wierzcholki):
         self.V = wierzcholki
         self.graf = []

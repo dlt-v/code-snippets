@@ -6,6 +6,7 @@ def fragment_packets(mtu, size, header=20):
     packet_number = math.ceil(size / max_packet_length)
     packet_list = []
     offset = 0
+    print(f'MTU: {mtu}\nData size: {size}\nHeader length: {header}\nMax packet length: {max_packet_length}\n')
     for _packet in range(packet_number):
         tag = 'MF'
         if size // max_packet_length > 0:

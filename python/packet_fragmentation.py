@@ -1,19 +1,20 @@
 import math
 
 
-def fragment_packets(mtu, size, header=20):
-    max_packet_length = ((mtu - header) // 8) * 8
+def fragment_packets(mtu, size, ip=20, tcp=0):
+    max_packet_length = ((mtu - ip) // 8) * 8
     packet_number = math.ceil(size / max_packet_length)
     packet_list = []
     offset = 0
-    print(f'MTU: {mtu}\nData size: {size}\nHeader length: {header}\nMax packet length: {max_packet_length}\n')
+    print(
+        f'MTU: {mtu}\nData size: {size}\nHeader length: {ip}\nMax packet length: {max_packet_length}\nTCP: {bool(tcp)}, {tcp}\n')
     for _packet in range(packet_number):
         tag = 'MF'
         if size // max_packet_length > 0:
             this_packet_size = max_packet_length
             size -= max_packet_length
         elif size % max_packet_length > 0:
-            this_packet_size = size % max_packet_length
+            this_packet_size = size % max_packet_length + tcp
             size -= size % max_packet_length
             tag = "LF"
 
@@ -29,8 +30,8 @@ def fragment_packets(mtu, size, header=20):
 
 
 def main():
-    # MTU, size, header (default = 20)
-    result = fragment_packets(576, 2100, 20)
+    # MTU, size, header (default = 20), tcp (default = 0)
+    result = fragment_packets(296, 1000, 20, 20)
 
     for packet in result:
         print(

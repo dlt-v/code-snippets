@@ -38,4 +38,4 @@ def match_keyword(word, keyword):
     return mask
 
 
-de_vigenere('DWAXVHJEAXFAK'.lower(), 'swieta')
+de_vigenere('GUVGZBPXRZTJR'.lower(), 'obraz')

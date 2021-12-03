@@ -45,6 +45,6 @@ def get_gen_number(number):
         e += 1
     print('Ø =', result)
 
-check_generators(4, 71)
+check_generators(3, 211)
 
 

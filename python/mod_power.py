@@ -25,4 +25,4 @@ def mod_power(a, base, n): # base, power, mod
 
 
 
-mod_power(134, 148, 220) # base, power, mod
+mod_power(255, 521, 314) # base, power, mod

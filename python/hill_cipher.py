@@ -4,6 +4,23 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l',
             'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 
-def hill(word, upper_row, lower_row):
+def hill(word, key_matrix):
+    i = 0
+    encrypted = ''
+    while i < len(word):
+        vector = np.array([alphabet.index(word[i]), alphabet.index(word[i + 1])])
+        result = vector.dot(key_matrix) % 26
+        print(f'{key_matrix} * {vector} % 26 = {result}')
+        encrypted += alphabet[result[0]]
+        encrypted += alphabet[result[1]]
+        i += 2
+    print(encrypted.upper())
 
-    pass
+
+# key_matrix = np.array([[5, 6],[17,19]])
+
+# hill('klawiatura', key_matrix) # DJKCOWTAHY
+
+key_matrix = np.array([[1, 12], [21, 3]])
+
+hill('DJKCOWTAHY'.lower(), key_matrix)

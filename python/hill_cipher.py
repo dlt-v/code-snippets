@@ -8,7 +8,11 @@ def hill(word, key_matrix):
     i = 0
     encrypted = ''
     while i < len(word):
-        vector = np.array([alphabet.index(word[i]), alphabet.index(word[i + 1])])
+        if word[i+1]:
+            vector = np.array([alphabet.index(word[i]), alphabet.index(word[i + 1])])
+        else:
+            vector = np.array([alphabet.index(word[i]), 0])
+            
         result = vector.dot(key_matrix) % 26
         print(f'{key_matrix} * {vector} % 26 = {result}')
         encrypted += alphabet[result[0]]

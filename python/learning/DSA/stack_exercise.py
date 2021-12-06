@@ -7,7 +7,7 @@ def convert_int_to_bin(dec_num):
         return '0'
 
     conv_result = Stack()
-    # convert decimal into binary stack (LSB first) s
+    # convert decimal into binary stack (LSB first)
     while dec_num > 0:
         conv_result.push(dec_num % 2)
         dec_num = dec_num // 2

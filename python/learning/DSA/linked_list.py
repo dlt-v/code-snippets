@@ -86,11 +86,93 @@ class LinkedList:
                 prev.next = cur_node.next
                 cur_node = None
 
+    def len_iterative(self) -> int:
+        count: int = 0
+        if self.head:
+            cur_node = self.head
+            while cur_node:
+                count += 1
+                cur_node = cur_node.next
+        return count
+
+    def len_recursive(self, node: Node | None) -> int:
+        if node is None:
+            return 0
+        return 1 + self.len_recursive(node.next)
+
+    def swap_nodes(self, key_1: str, key_2: str) -> None:
+        if key_1 == key_2:
+            return
+
+        prev_1 = None
+        curr_1: Node | None = self.head
+
+        while curr_1 and curr_1.data != key_1:  # find the key_1 and the previous node
+            prev_1 = curr_1
+            curr_1 = curr_1.next
+
+        prev_2 = None
+        curr_2 = self.head
+        while curr_2 and curr_2.data != key_2:  # find the key_2 and the previous node
+            prev_2 = curr_2
+            curr_2 = curr_2.next
+
+        if not curr_1 or not curr_2:  # if the looked for nodes cannot be found, return
+            return
+
+        if prev_1:  # set node1's previous node's pointer to the second node
+            prev_1.next = curr_2
+        else:
+            self.head = curr_2
+
+        if prev_2:  # set node2's previous node's pointer to the first node
+            prev_2.next = curr_1
+        else:
+            self.head = curr_1
+
+        # now swap the nodes' next pointers
+        curr_1.next, curr_2.next = curr_2.next, curr_1.next
+
+    def reverse_iterative(self) -> None:
+        previous_node = None  # the last element of the list should point to nothing
+        current_node = self.head  # we start from the first node
+
+        while current_node:  # while current node exists
+            next_node = current_node.next  # we store the next node in a variable
+            # we assign the pointer to previous node - "reverse arrows"
+            current_node.next = previous_node
+            # we move along the linked list and repeat the steps
+            previous_node = current_node
+            current_node = next_node
+        # at the end we set the head of the linked list to the last node
+        # since current_node at this point in time is None, we know that
+        # previous_node is in fact the last element
+        self.head = previous_node
+
+    def reverse_recursive(self) -> None:
+        # implement the base case
+        def _reverse_recursive(current_node: Node | None, previous_node: Node | None) -> Node | None:
+            if not current_node: #if current node doesn't exist, collapse the callstack
+                return previous_node
+            # change 
+            next_node: None | Node = current_node.next
+            current_node.next = previous_node
+
+            previous_node = current_node
+            current_node = next_node
+
+            return _reverse_recursive(current_node, previous_node)
+
+        self.head = _reverse_recursive(
+            current_node=self.head, previous_node=None)
+
 
 llist = LinkedList()
 llist.append("A")
 llist.append("B")
 llist.append("C")
 llist.append("D")
+
+llist.reverse_recursive()
 
 llist.print_list()

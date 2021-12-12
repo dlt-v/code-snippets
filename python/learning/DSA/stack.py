@@ -1,21 +1,25 @@
+from typing import Any, List
+
+
 class Stack():
-    def __init__(self):
-        self.items = []
+    def __init__(self) -> None:
+        self.items: List[Any] = []
 
-    def push(self, item):
-        self.items.append(item)				
+    def push(self, item: Any) -> None:
+        self.items.append(item)
 
-    def pop(self):
+    def pop(self) -> Any:
         return self.items.pop()
-    
-    def is_empty(self):
+
+    def is_empty(self) -> bool:
         return self.items == []
-    
-    def peek(self):
+
+    def peek(self) -> Any:
         if not self.is_empty():
             return self.items[-1]
-        
-    def get_stack(self):
+        return False
+
+    def get_stack(self) -> List[Any]:
         return self.items
 
 

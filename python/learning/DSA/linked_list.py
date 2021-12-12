@@ -1,7 +1,7 @@
 
 class Node:
-    def __init__(self, data: str) -> None:
-        self.data: str = data
+    def __init__(self, data: str | int) -> None:
+        self.data: str | int = data
         self.next: None | Node = None
 
 
@@ -16,7 +16,7 @@ class LinkedList:
             print(cur_node.data)
             cur_node = cur_node.next
 
-    def append(self, data: str) -> None:
+    def append(self, data: str | int) -> None:
         new_node = Node(data)
         if self.head is None:
             self.head = new_node
@@ -26,13 +26,13 @@ class LinkedList:
                 last_node = last_node.next  # if there is, move to the next node
             last_node.next = new_node  # at the end create next node in .next
 
-    def prepend(self, data: str) -> None:
+    def prepend(self, data: str | int) -> None:
         new_node: Node = Node(data)
 
         new_node.next = self.head
         self.head = new_node
 
-    def insert_after(self, prev_node: Node, data: str) -> None:
+    def insert_after(self, prev_node: Node, data: str | int) -> None:
         if not prev_node:
             print('Previous node doesn\'t exist')
         else:
@@ -41,7 +41,7 @@ class LinkedList:
             new_node.next = prev_node.next
             prev_node.next = new_node
 
-    def delete_node(self, key: str) -> None:
+    def delete_node(self, key: str | int) -> None:
         cur_node = self.head
 
         if cur_node and cur_node and cur_node.data == key:
@@ -100,7 +100,7 @@ class LinkedList:
             return 0
         return 1 + self.len_recursive(node.next)
 
-    def swap_nodes(self, key_1: str, key_2: str) -> None:
+    def swap_nodes(self, key_1: str | int, key_2: str | int) -> None:
         if key_1 == key_2:
             return
 
@@ -152,9 +152,9 @@ class LinkedList:
     def reverse_recursive(self) -> None:
         # implement the base case
         def _reverse_recursive(current_node: Node | None, previous_node: Node | None) -> Node | None:
-            if not current_node: #if current node doesn't exist, collapse the callstack
+            if not current_node:  # if current node doesn't exist, collapse the callstack
                 return previous_node
-            # change 
+            # change
             next_node: None | Node = current_node.next
             current_node.next = previous_node
 

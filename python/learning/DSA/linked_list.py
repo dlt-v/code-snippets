@@ -186,6 +186,19 @@ class LinkedList:
                     previous = current_node
                 current_node = previous.next
 
+    def nth_to_last(self, n: int) -> int | str | bool:
+        list_length: int = self.len_iterative()
+
+        current_node: Node | None = self.head
+
+        while current_node:
+            if list_length == n:
+                return current_node.data
+            list_length -= 1
+            current_node = current_node.next
+
+        return False
+
 
 llist = LinkedList()
 llist.append(1)
@@ -197,7 +210,5 @@ llist.append(2)
 llist.append(4)
 
 print("Original Linked List")
-llist.print_list()
-print("Linked List After Removing Duplicates")
-llist.remove_duplicates()
-llist.print_list()
+# llist.print_list()
+print(llist.nth_to_last(1))

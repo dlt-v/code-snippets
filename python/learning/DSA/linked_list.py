@@ -178,7 +178,7 @@ class LinkedList:
             while current_node:
                 # If data is already in array:
                 if current_node.data in duplicate_values and previous:
-                    previous.next = current_node.next
+                    previous.next = current_node.next  # skip this node
                     current_node = None
                 else:
                     # Have not encountered element before.
@@ -198,6 +198,19 @@ class LinkedList:
             current_node = current_node.next
 
         return False
+
+    def count_occurences(self, data: int | str) -> int:
+        count: int = 0
+        if self.head:
+            current_node: Node = self.head
+            while current_node:
+                if current_node.data == data:
+                    count += 1
+                if current_node.next is None:
+                    break
+                current_node = current_node.next
+
+        return count
 
 
 llist = LinkedList()

@@ -1,4 +1,7 @@
 
+from typing import List
+
+
 class Node:
     def __init__(self, data: str | int) -> None:
         self.data: str | int = data
@@ -166,13 +169,35 @@ class LinkedList:
         self.head = _reverse_recursive(
             current_node=self.head, previous_node=None)
 
+    def remove_duplicates(self) -> None:
+        if self.head:
+            current_node: Node | None = self.head
+            previous: None | Node = None
+            duplicate_values: List[int | str] = []
+
+            while current_node:
+                # If data is already in array:
+                if current_node.data in duplicate_values and previous:
+                    previous.next = current_node.next
+                    current_node = None
+                else:
+                    # Have not encountered element before.
+                    duplicate_values.append(current_node.data)
+                    previous = current_node
+                current_node = previous.next
+
 
 llist = LinkedList()
-llist.append("A")
-llist.append("B")
-llist.append("C")
-llist.append("D")
+llist.append(1)
+llist.append(6)
+llist.append(1)
+llist.append(4)
+llist.append(2)
+llist.append(2)
+llist.append(4)
 
-llist.reverse_recursive()
-
+print("Original Linked List")
+llist.print_list()
+print("Linked List After Removing Duplicates")
+llist.remove_duplicates()
 llist.print_list()
